@@ -1,9 +1,8 @@
 package com.example.authmoduleyt.domain.use_case
 
 import com.example.authmoduleyt.domain.model.RegisterInputValidationType
-import com.google.common.truth.Truth.assertThat
+import com.google.common.truth.Truth
 import org.junit.Test
-
 
 class ValidateRegisterInputUseCaseTest{
     private val validateRegisterInputUseCase = ValidateRegisterInputUseCase()
@@ -13,7 +12,7 @@ class ValidateRegisterInputUseCaseTest{
         val result = validateRegisterInputUseCase(
             "TestEmail@gmail.com", password = "ValidPassword1!", passwordRepeated = "ValidPassword1!"
         )
-        assertThat(result).isEqualTo(RegisterInputValidationType.Valid)
+        Truth.assertThat(result).isEqualTo(RegisterInputValidationType.Valid)
     }
 
     @Test
@@ -21,7 +20,7 @@ class ValidateRegisterInputUseCaseTest{
         val result = validateRegisterInputUseCase(
             "TestEmailgmail.com", password = "ValidPassword1!", passwordRepeated = "ValidPassword1!"
         )
-        assertThat(result).isEqualTo(RegisterInputValidationType.NoEmail)
+        Truth.assertThat(result).isEqualTo(RegisterInputValidationType.NoEmail)
     }
 
     @Test
@@ -29,7 +28,7 @@ class ValidateRegisterInputUseCaseTest{
         val result = validateRegisterInputUseCase(
             "TestEmail@gmail.com", password = "ValidPassworsd1!", passwordRepeated = "ValidPassword1!"
         )
-        assertThat(result).isEqualTo(RegisterInputValidationType.PasswordsDoNotMatch)
+        Truth.assertThat(result).isEqualTo(RegisterInputValidationType.PasswordsDoNotMatch)
     }
 
     @Test
@@ -37,7 +36,7 @@ class ValidateRegisterInputUseCaseTest{
         val result = validateRegisterInputUseCase(
             "TestEmail@gmail.com", password = "invalidpassword1!", passwordRepeated = "invalidpassword1!"
         )
-        assertThat(result).isEqualTo(RegisterInputValidationType.PasswordUpperCaseMissing)
+        Truth.assertThat(result).isEqualTo(RegisterInputValidationType.PasswordUpperCaseMissing)
     }
 
     @Test
@@ -45,7 +44,7 @@ class ValidateRegisterInputUseCaseTest{
         val result = validateRegisterInputUseCase(
             "TestEmail@gmail.com", password = "ValidPassword!", passwordRepeated = "ValidPassword!"
         )
-        assertThat(result).isEqualTo(RegisterInputValidationType.PasswordNumberMissing)
+        Truth.assertThat(result).isEqualTo(RegisterInputValidationType.PasswordNumberMissing)
     }
 
     @Test
@@ -53,7 +52,7 @@ class ValidateRegisterInputUseCaseTest{
         val result = validateRegisterInputUseCase(
             "TestEmail@gmail.com", password = "ValidPassword1", passwordRepeated = "ValidPassword1"
         )
-        assertThat(result).isEqualTo(RegisterInputValidationType.PasswordSpecialCharMissing)
+        Truth.assertThat(result).isEqualTo(RegisterInputValidationType.PasswordSpecialCharMissing)
     }
 
     @Test
@@ -61,6 +60,6 @@ class ValidateRegisterInputUseCaseTest{
         val result = validateRegisterInputUseCase(
             "TestEmail@gmail.com", password = "Valid1!", passwordRepeated = "Valid1!"
         )
-        assertThat(result).isEqualTo(RegisterInputValidationType.PasswordTooShort)
+        Truth.assertThat(result).isEqualTo(RegisterInputValidationType.PasswordTooShort)
     }
 }
